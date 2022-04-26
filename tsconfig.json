@@ -50,12 +50,10 @@
         "skipLibCheck": true,
         "suppressImplicitAnyIndexErrors": true,
         "allowSyntheticDefaultImports": true,
-        "noEmit": true,
-        "typeRoots": [
-            "./typings"
-        ]
+        "noEmit": true
     },
     "include": [
+        "./tsconfig.json",
         "./src",
         "./docs"
     ],

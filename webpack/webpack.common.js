@@ -18,11 +18,27 @@ const common = {
         rules: [
             {
                 test: /\.css$/,
-                use: [WebpackMiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+                use: [
+                    WebpackMiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.less$/,
-                use: [WebpackMiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+                use: [
+                    WebpackMiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    {
+                        loader: "less-loader",
+                        options: {
+                            lessOptions: {
+                                javascriptEnabled: true
+                            }
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(js|jsx|ts|tsx)$/,

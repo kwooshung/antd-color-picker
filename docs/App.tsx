@@ -1,6 +1,6 @@
 import React, { FC, createRef, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { } from 'antd';
+import Example from './components/Example';
 
 /**
  * 接口定义：Props属性
@@ -18,30 +18,6 @@ const App: FC<AppProps> = ({
     ...props
 }) => {
     /**
-     * refs定义
-     */
-    const refs = {
-    };
-
-    /**
-     * 函数
-     */
-    const methods = {
-    };
-
-    /**
-     * 事件
-     */
-    const events = {
-    };
-
-    /**
-     * 组件：更新副作用
-     */
-    useEffect(() => {
-    }, []);
-
-    /**
      * 渲染
      */
     const renders = {
@@ -52,6 +28,7 @@ const App: FC<AppProps> = ({
          */
         main(): JSX.Element {
             return <>
+                <Example />
             </>;
         }
     };
