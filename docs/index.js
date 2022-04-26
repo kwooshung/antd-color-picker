@@ -1,3 +1,3 @@
 'use strict'
 
-alert(12345);
+alert(1234);
