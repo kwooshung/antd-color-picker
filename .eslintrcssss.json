@@ -1,0 +1,55 @@
+{
+    "plugins": [
+        "react-hooks"
+    ],
+    "extends": [
+        "airbnb",
+        "prettier",
+        "plugin:compat/recommended",
+        "plugin:react/recommended",
+        "plugin:import/typescript",
+        "plugin:markdown/recommended"
+    ],
+    "rules": {
+        "import/extensions": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        ],
+        "react/jsx-first-prop-new-line": "error",
+        "semi": [
+            "error",
+            "always"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "indent": [
+            "off",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-plusplus": "off",
+        "react/sort-comp": "off",
+        "no-unused-expressions": "off",
+        "no-param-reassign": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "@next/next/no-img-element": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
+    }
+}

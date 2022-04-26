@@ -17,44 +17,57 @@
         "baseUrl": "./",
         "paths": {
             "@/*": [
-                "src/*"
+                "/src/*"
             ],
             "@com": [
-                "src/components/"
+                "/src/components/"
             ],
             "@com/*": [
-                "src/components/*"
+                "/src/components/*"
+            ],
+            "@docs": [
+                "/docs/"
+            ],
+            "@docs/*": [
+                "/docs/*"
             ],
             "@scripts": [
-                "src/assets/scripts/"
+                "/src/assets/scripts/"
             ],
             "@scripts/*": [
-                "src/assets/scripts/*"
+                "/src/assets/scripts/*"
             ],
             "@utils": [
-                "src/assets/scripts/utils/"
+                "/src/assets/scripts/utils/"
             ],
             "@utils/*": [
-                "src/assets/scripts/utils/*"
-            ],
-            "@pages": [
-                "docs/pages/"
-            ],
-            "@pages/*": [
-                "docs/pages/*"
+                "/src/assets/scripts/utils/*"
             ]
         },
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
+        "suppressImplicitAnyIndexErrors": true,
         "allowSyntheticDefaultImports": true,
         "noEmit": true,
         "typeRoots": [
             "./typings"
         ]
     },
+    "include": [
+        "./src",
+        "./docs"
+    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "lib",
+        "es",
+        "dist",
+        "typings",
+        "**/__test__",
+        "test",
+        "docs",
+        "tests"
     ]
 }
