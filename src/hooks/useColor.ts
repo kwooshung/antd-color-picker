@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Colors } from '../../src/interfaces/Colors'
+import colorConvert from 'color-convert';
 
 export interface Actions {
     /**
@@ -118,7 +119,21 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
          * @param {string} hex 颜色值
          */
         setHex(hex: string) {
+            const val: Colors['hex'] = hex;
 
+            const _rgb = colorConvert.hex.rgb(hex);
+            const rgb: Colors['rgb'] = {
+                r: _rgb[0],
+                g: _rgb[1],
+                b: _rgb[2]
+            };
+
+            const rgba: Colors['rgb'] = {
+                r: _rgb[0],
+                g: _rgb[1],
+                b: _rgb[2],
+                a: 1
+            };
         },
 
         /**
