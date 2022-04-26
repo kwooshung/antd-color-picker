@@ -1,0 +1,84 @@
+{
+    "name": "antd-color-picker",
+    "version": "1.0.0",
+    "description": "基于 Antd 的拾色器",
+    "main": "index.js",
+    "author": "KwooShung <kwooshung@qq.com>",
+    "license": "MIT",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean-lib": "rm -rf lib && mkdir lib",
+        "clean-es": "rm -rf es && mkdir es",
+        "lib": "npm run clean-lib && babel src -d lib",
+        "es": "npm run clean-es && babel src -d es",
+        "dev": "webpack serve --config ./webpack/webpack.dev.js",
+        "build": "webpack --config ./webpack/webpack.prod.js"
+    },
+    "keywords": [
+        "react",
+        "color picker",
+        "react-component",
+        "colorpicker",
+        "picker",
+        "sketch",
+        "chrome",
+        "photoshop",
+        "material design",
+        "popup",
+        "antd",
+        "antd design",
+        "kwooshung"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kwooshung/antd-color-picker.git",
+        "github": "https://github.com/kwooshung/antd-color-picker.git",
+        "gitee": "https://gitee.com/kwooshung/antd-color-picker.git"
+    },
+    "bugs": {
+        "url": "https://github.com/kwooshung/antd-color-picker/issues",
+        "github": "https://github.com/kwooshung/antd-color-picker/issues",
+        "gitee": "https://gitee.com/kwooshung/antd-color-picker/issues"
+    },
+    "homepage": "http://kwooshung.github.io/antd-color-picker/",
+    "files": [
+        "dist",
+        "lib",
+        "es"
+    ],
+    "dependencies": {
+        "antd": "^4.20.0",
+        "color-convert": "^2.0.1",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+    },
+    "peerDependencies": {
+        "react": "*"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/polyfill": "^7.12.1",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "@babel/preset-typescript": "^7.16.7",
+        "@types/react": "^18.0.7",
+        "@types/react-dom": "^18.0.0",
+        "autoprefixer": "^10.4.5",
+        "babel-loader": "^8.2.5",
+        "babel-plugin-import": "^1.13.5",
+        "css-loader": "^6.7.1",
+        "css-minimizer-webpack-plugin": "^3.4.1",
+        "html-webpack-plugin": "^5.5.0",
+        "less": "^4.1.2",
+        "less-loader": "^10.2.0",
+        "mini-css-extract-plugin": "^2.6.0",
+        "postcss-loader": "^6.2.1",
+        "style-loader": "^3.3.1",
+        "terser-webpack-plugin": "^5.3.1",
+        "typescript": "^4.6.3",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.8.1",
+        "webpack-merge": "^5.8.0"
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "ESNext",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "jsx": "react",
+        "isolatedModules": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@com": [
+                "src/components/"
+            ],
+            "@com/*": [
+                "src/components/*"
+            ],
+            "@scripts": [
+                "src/assets/scripts/"
+            ],
+            "@scripts/*": [
+                "src/assets/scripts/*"
+            ],
+            "@utils": [
+                "src/assets/scripts/utils/"
+            ],
+            "@utils/*": [
+                "src/assets/scripts/utils/*"
+            ],
+            "@pages": [
+                "docs/pages/"
+            ],
+            "@pages/*": [
+                "docs/pages/*"
+            ]
+        },
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "noEmit": true,
+        "typeRoots": [
+            "./typings"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
