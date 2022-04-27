@@ -4,11 +4,18 @@ import tinycolor from 'tinycolor2';
 
 export interface Actions {
     /**
+     * 设置颜色，格式不限
+     *
+     * @param {string} val 颜色值
+     */
+    stateColorSet: (val: string | Colors | tinycolor.ColorInput) => void;
+
+    /**
      * 设置：十六进制颜色
      * 
      * @param {string} hex 颜色值
      */
-    setHex: (hex: string) => void;
+    stateColorHexSet: (hex: string) => void;
 
     /**
      * 设置：RGB颜色
@@ -18,7 +25,7 @@ export interface Actions {
      * @param {number} b 蓝
      * @param {number} [a=1] alpha 透明度 百分比
      */
-    setRgb: (r: number, g: number, b: number, a?: number) => void;
+    stateColorRgbSet: (r: number, g: number, b: number, a?: number) => void;
 
     /**
      * 设置：HSL颜色
@@ -28,7 +35,7 @@ export interface Actions {
      * @param {number} l 亮度
      * @param {number} [a=1] alpha 透明度 百分比
      */
-    setHsl: (h: number, s: number, l: number, a?: number) => void;
+    stateColorHslSet: (h: number, s: number, l: number, a?: number) => void;
 
     /**
      * 设置：HSV颜色
@@ -38,19 +45,43 @@ export interface Actions {
      * @param {number} v 亮度
      * @param {number} [a=1] alpha 透明度 百分比
      */
-    setHsv: (h: number, s: number, b: number, a?: number) => void;
+    stateColorHsvSet: (h: number, s: number, b: number, a?: number) => void;
 };
 
-export default function useColors(defaultValue = false): [Colors, Actions] {
+export default function useColors(defaultValue: string | tinycolor.ColorInput): [Colors, Actions] {
     const [stateGet, stateSet] = useState<Colors>((() => {
-        const hex = '#000000';
+        if (typeof defaultValue === 'string') {
+            if (defaultValue[0] === '#') {
+                defaultValue = defaultValue.replace(/^#{1,}/, '');
+                if (defaultValue.length === 3) {
+                    defaultValue = `${defaultValue[0]}${defaultValue[0]}${defaultValue[1]}${defaultValue[1]}${defaultValue[2]}${defaultValue[2]}`;
+                }
+                else if (defaultValue.length === 4) {
+                    defaultValue = `${defaultValue[0]}${defaultValue[0]}${defaultValue[1]}${defaultValue[1]}${defaultValue[2]}${defaultValue[2]}${defaultValue[3]}${defaultValue[3]}`;
+                }
 
-        return {
-            hex,
-            rgb: tinycolor(hex).toRgb(),
-            hsl: tinycolor(hex).toHsl(),
-            hsv: tinycolor(hex).toHsv()
+                defaultValue = defaultValue.length === 8 ? tinycolor(defaultValue).toHex8() : tinycolor(defaultValue).toHex()
+
+                return {
+                    hex: defaultValue.length === 8 ? tinycolor(defaultValue).toHex8() : tinycolor(defaultValue).toHex(),
+                    rgb: tinycolor(defaultValue).toRgb(),
+                    hsl: tinycolor(defaultValue).toHsl(),
+                    hsv: tinycolor(defaultValue).toHsv()
+                };
+            }
+        }
+        const color: Colors = {
+            hex: tinycolor(defaultValue).toHex(),
+            rgb: tinycolor(defaultValue).toRgb(),
+            hsl: tinycolor(defaultValue).toHsl(),
+            hsv: tinycolor(defaultValue).toHsv()
         };
+
+        if (color.rgb.a != 1) {
+            color.hex = tinycolor(defaultValue).toHex8();
+        }
+
+        return color;
     })());
 
     const methods = {
@@ -72,15 +103,43 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
             return `#${hex}`;
         },
         /**
+         * 设置颜色，格式不限
+         *
+         * @param {string} val 颜色值
+         */
+        stateColorSet(val: string | Colors | tinycolor.ColorInput) {
+            if (typeof val === 'object') {
+                return val;
+            }
+            else if (typeof val === 'string') {
+                if (val[0] === '#') {
+                    val = methods.hexStandard(val);
+                }
+            }
+
+            const color: Colors = {
+                hex: tinycolor(val).toHex(),
+                rgb: tinycolor(val).toRgb(),
+                hsl: tinycolor(val).toHsl(),
+                hsv: tinycolor(val).toHsv()
+            };
+
+            if (color.rgb.a != 1) {
+                color.hex = tinycolor(defaultValue).toHex8();
+            }
+
+            stateSet(color);
+        },
+        /**
          * 设置：十六进制颜色
          * 
          * @param {string} hex 颜色值
          */
-        setHex(hex: string) {
-            hex = this.hexStandard(hex);
+        stateColorHexSet(hex: string) {
+            hex = methods.hexStandard(hex);
 
             stateSet({
-                hex,
+                hex: hex.length === 8 ? tinycolor(hex).toHex8() : tinycolor(hex).toHex(),
                 rgb: tinycolor(hex).toRgb(),
                 hsl: tinycolor(hex).toHsl(),
                 hsv: tinycolor(hex).toHsv()
@@ -95,7 +154,7 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
          * @param {number} b 蓝
          * @param {number} [a=1] alpha 透明度 百分比
          */
-        setRgb(r: number, g: number, b: number, a: number = 1) {
+        stateColorRgbSet(r: number, g: number, b: number, a: number = 1) {
             const _rgb: Colors['rgb'] = { r, g, b, a };
 
             stateSet({
@@ -113,7 +172,7 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
          * @param {number} l 亮度
          * @param {number} [a=1] alpha 透明度 百分比
          */
-        setHsl(h: number, s: number, l: number, a: number = 1) {
+        stateColorHslSet(h: number, s: number, l: number, a: number = 1) {
             const _hsl: Colors['hsl'] = { h, s, l, a };
 
             stateSet({
@@ -132,7 +191,7 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
          * @param {number} v 亮度
          * @param {number} [a=1] alpha 透明度 百分比
          */
-        setHsv(h: number, s: number, v: number, a: number = 1) {
+        stateColorHsvSet(h: number, s: number, v: number, a: number = 1) {
             const _hsv: Colors['hsv'] = { h, s, v, a };
 
             stateSet({
@@ -146,10 +205,11 @@ export default function useColors(defaultValue = false): [Colors, Actions] {
 
     const actions: Actions = useMemo(() => {
         return {
-            setHex: methods.setHex,
-            setRgb: methods.setRgb,
-            setHsl: methods.setHsl,
-            setHsv: methods.setHsv
+            stateColorSet: methods.stateColorSet,
+            stateColorHexSet: methods.stateColorHexSet,
+            stateColorRgbSet: methods.stateColorRgbSet,
+            stateColorHslSet: methods.stateColorHslSet,
+            stateColorHsvSet: methods.stateColorHsvSet
         };
     }, []);
 

@@ -1,22 +1,25 @@
 import styles from './index.module.less';
 import type { ReactNode } from 'react';
 import React, { FC, createRef, useEffect } from 'react';
+import { Colors } from '../../interfaces/Colors';
+import useColors from '../../hooks/useColor';
+import tinycolor from 'tinycolor2';
 
 /**
  * 接口定义：Props属性
  */
 export interface BoardProps {
     /**
-     * 十六进制颜色，不包含#号
+     * 颜色对象
      */
-    hex: string
+    val: string | Colors | tinycolor.ColorInput
 };
 
 /**
  * 定义：Props属性默认值
  */
 const defaultProps: BoardProps = {
-    hex: '#000'
+    val: '#000'
 };
 
 const Board: FC<BoardProps> = ({
@@ -27,6 +30,8 @@ const Board: FC<BoardProps> = ({
      */
     const refs = {
     };
+
+    const [stateColorGet, { stateColorSet }] = useColors('#000');
 
     /**
      * 函数
@@ -44,7 +49,8 @@ const Board: FC<BoardProps> = ({
      * 组件：更新副作用
      */
     useEffect(() => {
-    }, []);
+        stateColorSet(props.val)
+    }, [props.val]);
 
     /**
      * 渲染
@@ -56,7 +62,7 @@ const Board: FC<BoardProps> = ({
          * @return {*}  {JSX.Element}
          */
         main(): JSX.Element {
-            return <div className={styles.board} style={{ background: `#${props.hex}`.replace('##', '') }}>
+            return <div className={styles.board} style={{ background: `rgba(${stateColorGet.rgb.r}, ${stateColorGet.rgb.g}, ${stateColorGet.rgb.b}, ${stateColorGet.rgb.a})` }}>
                 <div>
                     <div></div>
                 </div>
