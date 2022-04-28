@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react';
 import React, { FC, createRef, useEffect } from 'react';
 import { } from 'antd';
-import Board from '../../../src/components/board';
+import Saturation from '../../../src/components/Saturation';
 
 /**
  * 接口定义：Props属性
@@ -54,7 +54,9 @@ const Example: FC<ExampleProps> = ({
          */
         main(): JSX.Element {
             return <>
-                <Board hex='f00' />
+                <div style={{ margin: '150px auto 0', padding: '10px', width: '300px', height: '300px', border: '1px #eee solid', borderRadius: '5px', boxShadow: '0 0 3px rgba(0, 0, 0, .15)', background: '#fff' }}>
+                    <Saturation val='f00' />
+                </div>
             </>;
         }
     };

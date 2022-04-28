@@ -184,11 +184,11 @@ export default function useColors(defaultValue: string | tinycolor.ColorInput): 
         },
 
         /**
-         * 设置：HSV颜色
+         * 设置：HSV（HSB）颜色
          * 
          * @param {number} h 色相
          * @param {number} s 饱和度
-         * @param {number} v 亮度
+         * @param {number} v 明度
          * @param {number} [a=1] alpha 透明度 百分比
          */
         stateColorHsvSet(h: number, s: number, v: number, a: number = 1) {

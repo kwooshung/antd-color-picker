@@ -1,33 +1,21 @@
 import styles from './index.module.less';
 import type { ReactNode } from 'react';
 import React, { FC, createRef, useEffect } from 'react';
-import { Colors } from '../../../interfaces/Colors';
-
-export interface InteractiveOnChangeProps {
-    x: number;
-    y: number;
-    complete?: boolean;
-};
+import { } from 'antd';
 
 /**
  * 接口定义：Props属性
  */
-export interface BoardProps {
-    color?: Colors,
-    onChange?: (e: InteractiveOnChangeProps) => void,
-    children?: ReactNode
+export interface SaturationProps {
 };
 
 /**
  * 定义：Props属性默认值
  */
-const defaultProps: BoardProps = {
-    color: undefined,
-    onChange: undefined,
-    children: null
+const defaultProps: SaturationProps = {
 };
 
-const Board: FC<BoardProps> = ({
+const Saturation: FC<SaturationProps> = ({
     ...props
 }) => {
     /**
@@ -35,6 +23,15 @@ const Board: FC<BoardProps> = ({
      */
     const refs = {
     };
+
+    /**
+     * states定义
+     */
+    type statesType = {
+    };
+    const states: statesType = useReactive({
+
+    });
 
     /**
      * 函数
@@ -49,10 +46,28 @@ const Board: FC<BoardProps> = ({
     };
 
     /**
+     * 组件：首次加载
+     */
+    useMount(() => {
+    });
+
+    /**
      * 组件：更新副作用
      */
     useEffect(() => {
     }, []);
+
+    /**
+     * 组件：更新副作用（忽略第一次）
+     */
+    useUpdateEffect(() => {
+    }, []);
+
+    /**
+     * 组件：卸载
+     */
+    useUnmount(() => {
+    });
 
     /**
      * 渲染
@@ -64,17 +79,14 @@ const Board: FC<BoardProps> = ({
          * @return {*}  {JSX.Element}
          */
         main(): JSX.Element {
-            return <div className={styles.board} style={{ background: `#${props.hex}`.replace('##', '') }}>
-                <div>
-                    <div></div>
-                </div>
-            </div>;
+            return <>
+            </>;
         }
     };
 
     return renders.main();
 };
 
-Board.defaultProps = defaultProps;
+Saturation.defaultProps = defaultProps;
 
-export default Board;
+export default Saturation;

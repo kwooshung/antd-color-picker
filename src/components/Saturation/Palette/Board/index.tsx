@@ -1,8 +1,8 @@
 import styles from './index.module.less';
-import type { ReactNode } from 'react';
-import React, { FC, createRef, useEffect } from 'react';
-import { Colors } from '../../interfaces/Colors';
-import useColors from '../../hooks/useColor';
+import { ReactNode, useRef } from 'react';
+import React, { FC, useEffect, MouseEvent } from 'react';
+import { Colors } from '../../../../interfaces/Colors';
+import useColors from '../../../../hooks/useColor';
 import tinycolor from 'tinycolor2';
 
 /**
@@ -25,24 +25,21 @@ const defaultProps: BoardProps = {
 const Board: FC<BoardProps> = ({
     ...props
 }) => {
-    /**
-     * refs定义
-     */
-    const refs = {
-    };
-
     const [stateColorGet, { stateColorSet }] = useColors('#000');
-
-    /**
-     * 函数
-     */
-    const methods = {
-    };
 
     /**
      * 事件
      */
     const events = {
+        /**
+         * 事件：鼠标按下
+         *
+         * @param {MouseEvent<HTMLDivElement>} e 事件对象
+         */
+        onMouseDown(e: MouseEvent<HTMLDivElement>) {
+            const body = document.querySelector('body');
+            body?.classList.add('mousedown-color');
+        }
     };
 
     /**
@@ -59,10 +56,14 @@ const Board: FC<BoardProps> = ({
         /**
          * 主渲染
          *
-         * @return {*}  {JSX.Element}
+         * @return {*} {JSX.Element}
          */
         main(): JSX.Element {
-            return <div className={styles.board} style={{ background: `rgba(${stateColorGet.rgb.r}, ${stateColorGet.rgb.g}, ${stateColorGet.rgb.b}, ${stateColorGet.rgb.a})` }}>
+            return <div
+                className={styles.board}
+                style={{ background: `rgba(${stateColorGet.rgb.r}, ${stateColorGet.rgb.g}, ${stateColorGet.rgb.b}, ${stateColorGet.rgb.a})` }}
+                onMouseDown={events.onMouseDown}
+            >
                 <div>
                     <div></div>
                 </div>
