@@ -1,8 +1,10 @@
 // import styles from './index.less';
 import type { ReactNode } from 'react';
 import React, { FC, createRef, useEffect } from 'react';
-import { } from 'antd';
 import Saturation from '../../../src/components/Saturation';
+import useColors from '../../../src/hooks/useColors'
+import { Colors } from '../../../src/Interfaces/Colors';
+import { } from 'antd';
 
 /**
  * 接口定义：Props属性
@@ -26,6 +28,11 @@ const Example: FC<ExampleProps> = ({
     };
 
     /**
+     * 当前颜色
+     */
+    const [stateColorGet, { stateColorHsvSet }] = useColors('#f00');
+
+    /**
      * 函数
      */
     const methods = {
@@ -35,6 +42,12 @@ const Example: FC<ExampleProps> = ({
      * 事件
      */
     const events = {
+        onChange(color: Colors) {
+
+        },
+        onChangeComplete(color: Colors) {
+
+        }
     };
 
     /**
@@ -55,7 +68,7 @@ const Example: FC<ExampleProps> = ({
         main(): JSX.Element {
             return <>
                 <div style={{ margin: '150px auto 0', padding: '10px', width: '300px', height: '300px', border: '1px #eee solid', borderRadius: '5px', boxShadow: '0 0 3px rgba(0, 0, 0, .15)', background: '#fff' }}>
-                    <Saturation val='f00' />
+                    <Saturation color={stateColorGet} onChange={events.onChange} onChangeComplete={events.onChangeComplete} />
                 </div>
             </>;
         }

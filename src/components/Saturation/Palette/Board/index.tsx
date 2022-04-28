@@ -1,8 +1,8 @@
 import styles from './index.module.less';
 import { ReactNode, useRef } from 'react';
 import React, { FC, useEffect, MouseEvent } from 'react';
-import { Colors } from '../../../../interfaces/Colors';
-import useColors from '../../../../hooks/useColor';
+import { Colors } from '../../../../Interfaces/Colors';
+import useColors from '../../../../hooks/useColors';
 import tinycolor from 'tinycolor2';
 
 /**

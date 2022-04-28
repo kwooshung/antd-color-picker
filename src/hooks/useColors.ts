@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Colors } from '../../src/interfaces/Colors'
+import { Colors } from '../../src/Interfaces/Colors'
 import tinycolor from 'tinycolor2';
 
 export interface Actions {

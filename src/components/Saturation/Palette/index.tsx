@@ -1,10 +1,10 @@
 import styles from './index.module.less';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import React, { FC, createRef, useEffect } from 'react';
 import Board from './Board';
 import { Clamp } from '../../../assets/scripts/utils'
-import { Colors } from '../../../interfaces/Colors';
-import useColors from '../../../hooks/useColor';
+import { Colors } from '../../../Interfaces/Colors';
+import useColors from '../../../hooks/useColors';
 import tinycolor from 'tinycolor2';
 
 /**
@@ -14,7 +14,23 @@ export interface InteractiveProps {
     /**
      * 颜色对象
      */
-    val: string | Colors | tinycolor.ColorInput,
+    val?: string | Colors | tinycolor.ColorInput,
+
+    /**
+     * 光标：X坐标
+     */
+    cursorX?: number,
+
+    /**
+     * 光标：Y坐标
+     */
+    cursorY?: number,
+
+    /**
+     * 光标：颜色对象
+     */
+    cursorColor?: Colors,
+
     /**
      * 拖拽改变时
      *
@@ -29,8 +45,9 @@ export interface InteractiveProps {
  * 定义：Props属性默认值
  */
 const defaultProps: InteractiveProps = {
-    val: '#000',
-
+    val: '#f00',
+    cursorX: -10,
+    cursorY: -10
 };
 
 const Interactive: FC<InteractiveProps> = ({
@@ -43,18 +60,20 @@ const Interactive: FC<InteractiveProps> = ({
         /**
          * 区域
          */
-        area: useRef<HTMLDivElement>(null)
+        area: useRef<HTMLDivElement>(null),
+        /**
+         * 光标
+         */
+        cursor: useRef<HTMLDivElement>(null)
     };
 
     const [stateColorGet, { stateColorSet }] = useColors('#000');
+    const [statePositionGet, statePositionSet] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
 
     /**
      * 函数
      */
     const methods = {
-        init() {
-
-        },
         /**
          * 鼠标移动处理函数
          *
@@ -70,9 +89,18 @@ const Interactive: FC<InteractiveProps> = ({
                 const y = Clamp(e.clientY - top, height, 0);
 
                 if (props.onChange) {
-                    props.onChange(x, y);
+                    props.onChange(x, y, false);
                     complete && props.onChange(x, y, true);
                 }
+            }
+        },
+        /**
+         * 坐标计算
+         */
+        position() {
+            if (props.cursorX && props.cursorY && refs.cursor.current) {
+                const { current: cursor } = refs.cursor;
+                statePositionSet({ x: props.cursorX - cursor.offsetWidth / 2, y: props.cursorY - cursor.offsetHeight / 2 });
             }
         }
     };
@@ -115,8 +143,15 @@ const Interactive: FC<InteractiveProps> = ({
      * 组件：更新副作用
      */
     useEffect(() => {
-        stateColorSet(props.val)
+        if (props.val) {
+            stateColorSet(props.val);
+        }
     }, [props.val]);
+
+    /**
+     * 组件：坐标更新副作用
+     */
+    useEffect(methods.position, [props.cursorX, props.cursorY]);
 
     /**
      * 渲染
@@ -133,8 +168,8 @@ const Interactive: FC<InteractiveProps> = ({
                 className={styles.interactive}
                 onMouseDown={events.onMouseDown}
             >
-                <Board val={props.val} />
-                <div className={styles['cursor-color']} />
+                <Board val={`#${stateColorGet.hex}`} />
+                <div ref={refs.cursor} style={{ transform: `translate(${statePositionGet.x}px, ${statePositionGet.y}px)`, backgroundColor: props.cursorColor ? `#${props.cursorColor.hex}` : `#${stateColorGet.hex}` }} className={styles['cursor-color']} />
             </div>;
         }
     };
@@ -142,5 +177,6 @@ const Interactive: FC<InteractiveProps> = ({
     return renders.main();
 };
 
+Interactive.defaultProps = defaultProps;
 
 export default Interactive;
