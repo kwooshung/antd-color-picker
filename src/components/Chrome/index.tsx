@@ -76,6 +76,10 @@ export interface ChromeProps {
      */
     hexType: 'short' | 'full',
     /**
+     * 是否强制显示hex的通明度值
+     */
+    hexAlphaForce: boolean,
+    /**
      * 复制功能：是否启动
      */
     copy?: boolean,
@@ -106,6 +110,7 @@ const defaultProps: ChromeProps = {
     color: '#194d33',
     colorType: 'hexa',
     hexType: 'short',
+    hexAlphaForce: false,
     copytip: ['复制当前色值', '已成功复制']
 };
 
@@ -253,6 +258,7 @@ const Chrome: FC<ChromeProps> = ({
 
     const [stateColorGet, stateColorSet] = useState<Colors>(() => methods.hsva2Color(methods.hexa2Hsva(props.color)));
     const [stateControlsIndexGet, stateControlsIndexSet] = useState<number>(methods.colorType());
+    const [stateControlsHexGet, stateControlsHexSet] = useState<string>('');
 
     /**
      * 事件
@@ -306,7 +312,20 @@ const Chrome: FC<ChromeProps> = ({
              * @param {ChangeEvent<HTMLInputElement>} [e] 事件对象
              */
             onHexChange(e?: ChangeEvent<HTMLInputElement>) {
-                e && methods.hsva2Color(methods.hexa2Hsva(`#${e.target.value}`));
+                if (e) {
+                    try {
+                        if (e.target.value.length === 5 || e.target.value.length === 7) {
+                            stateControlsHexSet(e.target.value);
+                        }
+                        else {
+                            stateControlsHexSet('');
+                            stateColorSet(methods.hsva2Color(methods.hexa2Hsva(`#${e.target.value}`)));
+                        }
+                    }
+                    catch {
+                        stateControlsHexSet(e.target.value);
+                    }
+                }
             },
             /**
              * 数字输入框改变时
@@ -455,7 +474,7 @@ const Chrome: FC<ChromeProps> = ({
                          * @return {*} {ReactNode} ReactNode节点
                          */
                         hex(value: Colors['hex'] | Colors['hexa']): ReactNode {
-                            return <Input addonBefore="#" size='small' value={value[props.hexType]} onChange={events.inputs.onHexChange} />;
+                            return <Input addonBefore="#" size='small' value={stateControlsHexGet ? stateControlsHexGet : value[props.hexType].replace('#', '')} maxLength={8} onChange={events.inputs.onHexChange} />;
                         },
                         /**
                          * 数值
@@ -495,9 +514,9 @@ const Chrome: FC<ChromeProps> = ({
                 hexa(): ReactNode {
                     return <li>
                         <div className={`ks-antd-color-picker-input ${styles['inputs']}`}>
-                            {this.elements.inputs.hex(stateColorGet.rgba.a < 1 ? stateColorGet.hexa : stateColorGet.hex)}
+                            {this.elements.inputs.hex((stateColorGet.rgba.a < 1 || props.hexAlphaForce) ? stateColorGet.hexa : stateColorGet.hex)}
                         </div>
-                        {this.elements.name(stateColorGet.rgba.a < 1 ? stateColorGet.hexa[props.hexType] : stateColorGet.hex[props.hexType], 'HEX/HEXA')}
+                        {this.elements.name((stateColorGet.rgba.a < 1 || props.hexAlphaForce) ? stateColorGet.hexa[props.hexType] : stateColorGet.hex[props.hexType], 'HEX/HEXA')}
                     </li>;
                 },
                 /**
