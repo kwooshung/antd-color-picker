@@ -1,5 +1,4 @@
 import React, { FC, createRef, useEffect } from 'react';
-import type { ReactNode } from 'react';
 import Example from './components/Example';
 
 /**

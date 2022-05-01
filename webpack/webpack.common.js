@@ -31,7 +31,7 @@ const common = {
                     'css-loader',
                     'postcss-loader',
                     {
-                        loader: "less-loader",
+                        loader: 'less-loader',
                         options: {
                             lessOptions: {
                                 javascriptEnabled: true

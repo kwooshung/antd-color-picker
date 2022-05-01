@@ -1,0 +1,201 @@
+.chrome-picker {
+    border-radius:2px;
+    box-shadow:0 0 3px rgb(0 0 0 / 50%);
+
+    > .saturation {
+        position:relative;
+        width:100%;
+        padding-bottom:55%;
+        border-radius:2px 2px 0 0;
+        overflow:hidden;
+
+        > .saturation {
+            position:absolute !important;
+            top:0 !important;
+            left:0 !important;
+            width:100% !important;
+            height:100% !important;
+        }
+    }
+
+    > .body {
+        padding:16px 16px 12px;
+
+        > .bar-area {
+            display:flex;
+            margin-bottom:15px;
+
+            > .alpha-preview {
+                margin-right:15px;
+                overflow:hidden;
+            }
+
+            > .bars {
+                flex:1 1 0%;
+
+                > div {
+                    &:first-child {
+                        margin-bottom:8px;
+                    }
+
+                    > div {
+                        &:last-child {
+                            > div {
+                                > div {
+                                    position:absolute;
+                                    top:50%;
+                                    left:50%;
+                                    width:16px !important;
+                                    height:16px !important;
+                                    transform:translate(-50%, -3px) !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        > .controls {
+            position:relative;
+            overflow:hidden;
+            transition:height 300ms ease-out;
+
+            &.hexa {
+                height:46px;
+            }
+
+            &.rgba,
+            &.hsla,
+            &.hsva {
+                height:142px;
+            }
+
+            &.hex { ul { &.input-editable { transform:translateY(0); } } }
+            &.rgba { ul { &.input-editable { transform:translateY(-46px); } } }
+            &.hsla { ul { &.input-editable { transform:translateY(-188px); } } }
+            &.hsva { ul { &.input-editable { transform:translateY(-330px); } } }
+
+            > ul {
+                list-style:none;
+                padding:0;
+                margin:0;
+
+                &.input-editable {
+                    display:flex;
+                    flex-direction:column;
+                    height:326px;
+                    transition:transform 300ms ease-out;
+
+                    > li {
+                        padding:0 26px 0 0;
+
+                        > div {
+                            &.inputs {
+                                [class*='input-group-addon'],
+                                [class*='input-number-group-addon'] {
+                                    width:24px;
+                                    padding:0;
+                                }
+
+                                [class*='input-group-addon'] {
+                                    font-size:18px;
+                                    line-height:18px;
+                                }
+
+                                > div,
+                                > span {
+                                    margin-bottom:8px;
+                                }
+                            }
+
+                            &:last-child {
+                                display:block;
+                                height:14px;
+                                margin:0;
+                                font-size:11px;
+                                line-height:14px;
+                                text-align:center;
+                                text-transform:uppercase;
+                            }
+                        }
+                    }
+                }
+
+                &.buttons {
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    width:20px;
+                    height:24px;
+                    border-radius:3px;
+                    overflow:hidden;
+
+                    > li {
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        height:12px;
+                        overflow:hidden;
+                        transition:color 300ms ease-out, background-color 100ms ease-out;
+                        cursor:pointer;
+
+                        > span {
+                            font-size:16px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:not(.colourless) {
+            > .bar-area {
+                > .alpha-preview {
+                    box-shadow:inset rgb(0 0 0 / 25%) 0 0 1px;
+                }
+            }
+
+            > .controls {
+                > ul {
+                    &.input-editable {
+                        > li {
+                            > .inputs {
+                                [class*='input-group-addon'],
+                                [class*='input-number-group-addon'] {
+                                    color:#969696;
+                                }
+                            }
+
+                            > div {
+                                &:last-child {
+                                    .btn-copy {
+                                        color:#aaa;
+                                        background-color:#f0f0f0;
+
+                                        &:hover {
+                                            color:#666;
+                                            background-color:#ddd;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.buttons {
+                        background-color:#f0f0f0;
+
+                        > li {
+                            color:#ccc;
+
+                            &:hover {
+                                color:#666;
+                                background-color:#ddd;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

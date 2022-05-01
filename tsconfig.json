@@ -15,35 +15,6 @@
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "baseUrl": "./",
-        "paths": {
-            "@/*": [
-                "/src/*"
-            ],
-            "@com": [
-                "/src/components/"
-            ],
-            "@com/*": [
-                "/src/components/*"
-            ],
-            "@docs": [
-                "/docs/"
-            ],
-            "@docs/*": [
-                "/docs/*"
-            ],
-            "@scripts": [
-                "/src/assets/scripts/"
-            ],
-            "@scripts/*": [
-                "/src/assets/scripts/*"
-            ],
-            "@utils": [
-                "/src/assets/scripts/utils/"
-            ],
-            "@utils/*": [
-                "/src/assets/scripts/utils/*"
-            ]
-        },
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "forceConsistentCasingInFileNames": true,
