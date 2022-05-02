@@ -54,7 +54,7 @@ const common = {
             template: absPath('../demo/index.html'),
             filename: 'index.html',
             title: '@KwooShung/Antd Color Picker',
-            version: ['1.0.0']
+            version: ['1.0.3']
         })
     ],
     resolve: {
