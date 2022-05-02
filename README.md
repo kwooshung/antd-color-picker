@@ -36,7 +36,7 @@ import KsColorPicker from '@kwooshung/antd-color-picker';
 <KsColorPicker.Chrome color='#f00' onChange={events.onChange.color} />
 ```
 
-### [详细演示代码](https://github.com/kwooshung/antd-color-picker/blob/master/docs/components/Example/index.tsx)
+### [详细演示代码](https://github.com/kwooshung/antd-color-picker/blob/master/demo/components/Example/index.tsx)
 
 
 
@@ -46,21 +46,21 @@ import KsColorPicker from '@kwooshung/antd-color-picker';
 
 # API
 
-| 属性          | 说明                                                     | 数据类型                             | 必须 | 默认值                         | 版本   |
-| ------------- | -------------------------------------------------------- | ------------------------------------ | ---- | ------------------------------ | ------ |
-| className     | 类样式名                                                 | string                               | 否   |                                | v1.0.0 |
-| colourless    | 无色模式，主要针对按钮，箭头图标，文字颜色均为浏览器默认，这样可以使用 [Antd 动态主题](https://ant.design/docs/react/customize-theme-variable-cn)，[颜色案例代码](#颜色案例代码) | boolean                              | 否   | false                          | v1.0.0 |
-| width         | 宽度                                                     | number \| string（hexa色值，含`#`号）    | 否   | 225                            | v1.0.0 |
-| color         | 默认颜色                                                 | [Colors](#colors) \| string          | 否   | #194d33                        | v1.0.0 |
-| colorType     | 默认表达式                                               | `hexa` | `rgba` | `hsla` | `hsva` | 否 | `hexa` |     |
-| hexType       | 十六进制色值：类型，简写法（当可以简写时）和完整写法     | `short` | `full` | 否                    | `short` | short                          |
-| hexUppercase  | 十六进制色值：是否大写                                   | boolean                              | 否   | false                          | v1.0.0 |
-| hexAlphaForce | 十六进制设置：是否强制Alpha通道透明表达方式              | boolean                              | 否   | false                          | v1.0.0 |
-| pointer       | 滑动条（Hue，Alpha）上的指针按钮                         | `ReactNode` | `JSX.Element`          | 否   | v1.0.0 |
-| copy          | 是否支持复制色值                                         | boolean                              | 否   | true                           | v1.0.0 |
-| copytip       | 自定义复制色值的提示文案                                 | [ReactNode, ReactNode]               | 否   | ['复制当前色值', '已成功复制'] | v1.0.0 |
-| onCopy        | 复制成功时的回调函数                                     | (*color*: [Colors](#colors)) => void | 否   | undefined                      | v1.0.0 |
-| onChange      | 颜色改变时的回调函数                                     | (*color*: [Colors](#colors)) => void | 否   | undefined                      | v1.0.0 |
+| 属性          | 说明                                                                                                                                                                             | 数据类型                              | 必须          | 默认值                         | 版本    |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ------------- | ------------------------------ | ------- |
+| className     | 类样式名                                                                                                                                                                         | string                                | 否            |                                | v1.0.0  |
+| colourless    | 无色模式，主要针对按钮，箭头图标，文字颜色均为浏览器默认，这样可以使用 [Antd 动态主题](https://ant.design/docs/react/customize-theme-variable-cn)，[颜色案例代码](#颜色案例代码) | boolean                               | 否            | false                          | v1.0.0  |
+| width         | 宽度                                                                                                                                                                             | number \| string（hexa色值，含`#`号） | 否            | 225                            | v1.0.0  |
+| color         | 默认颜色                                                                                                                                                                         | [Colors](#colors) \| string           | 否            | #194d33                        | v1.0.0  |
+| colorType     | 默认表达式                                                                                                                                                                       | `hexa`                                | `rgba`        | `hsla`                         | `hsva`  | 否    | `hexa` |  |
+| hexType       | 十六进制色值：类型，简写法（当可以简写时）和完整写法                                                                                                                             | `short`                               | `full`        | 否                             | `short` | short |
+| hexUppercase  | 十六进制色值：是否大写                                                                                                                                                           | boolean                               | 否            | false                          | v1.0.0  |
+| hexAlphaForce | 十六进制设置：是否强制Alpha通道透明表达方式                                                                                                                                      | boolean                               | 否            | false                          | v1.0.0  |
+| pointer       | 滑动条（Hue，Alpha）上的指针按钮                                                                                                                                                 | `ReactNode`                           | `JSX.Element` | 否                             | v1.0.0  |
+| copy          | 是否支持复制色值                                                                                                                                                                 | boolean                               | 否            | true                           | v1.0.0  |
+| copytip       | 自定义复制色值的提示文案                                                                                                                                                         | [ReactNode, ReactNode]                | 否            | ['复制当前色值', '已成功复制'] | v1.0.0  |
+| onCopy        | 复制成功时的回调函数                                                                                                                                                             | (*color*: [Colors](#colors)) => void  | 否            | undefined                      | v1.0.0  |
+| onChange      | 颜色改变时的回调函数                                                                                                                                                             | (*color*: [Colors](#colors)) => void  | 否            | undefined                      | v1.0.0  |
 
 # Colors
 
