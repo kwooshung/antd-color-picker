@@ -84,8 +84,8 @@ const Example: FC<ExampleProps> = ({
     };
 
     useEffect(() => {
-        fetch('').then((data: any) => {
-            stateArticleSet(data);
+        fetch('https://raw.githubusercontent.com/kwooshung/antd-color-picker/develop/README.md').then(async (data) => {
+            stateArticleSet(await data.text());
         });
     }, []);
 
@@ -160,7 +160,6 @@ const Example: FC<ExampleProps> = ({
             return <>
                 {this.header()}
                 {this.apiDoc(stateArticleGet)}
-                <KsColorPicker.Chrome color={stateBackgroundColorGet} colourless={true} onChange={events.onChange.color} />
             </>;
         }
     };
