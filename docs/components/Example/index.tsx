@@ -37,6 +37,11 @@ const Example: FC<ExampleProps> = ({
     const [stateThemeGet, stateThemeSet] = useState<string | number>('light');
 
     /**
+     * 状态：文档MD说明
+     */
+    const [stateArticleGet, stateArticleSet] = useState<string>('');
+
+    /**
      * 函数
      */
     const methods = {
@@ -78,6 +83,12 @@ const Example: FC<ExampleProps> = ({
         }
     };
 
+    useEffect(() => {
+        fetch('').then((data: any) => {
+            stateArticleSet(data);
+        });
+    }, []);
+
     /**
      * 组件：更新副作用
      */
@@ -107,7 +118,7 @@ const Example: FC<ExampleProps> = ({
          * @param {string} code MD代码
          * @return {*} {ReactNode} ReactNode节点
          */
-        editor(code: string): ReactNode {
+        apiDoc(code: string): ReactNode {
             return <MdEditor className={styles.article} dark={stateThemeGet === 'dark'} value={code} readOnly={true} />;
         },
         /**
@@ -148,9 +159,7 @@ const Example: FC<ExampleProps> = ({
         main(): JSX.Element {
             return <>
                 {this.header()}
-                {this.editor(`# 为什么存在这个组件？
-                世面上虽然已有很多类似的插件，但是质量参差不齐，虽然也有很成熟的组件，如：React Color
-                `)}
+                {this.apiDoc(stateArticleGet)}
                 <KsColorPicker.Chrome color={stateBackgroundColorGet} colourless={true} onChange={events.onChange.color} />
             </>;
         }
