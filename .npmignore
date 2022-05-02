@@ -1,0 +1,14 @@
+# .npmignore 
+src
+demo
+webpack
+node_modules
+.babelrc
+.gitignore
+.eslintrc
+.postcss.config.js
+tsconfig.json
+typings.d.ts
+yarn-error.log
+yarn.lock
+.stylelintrc.js

@@ -1,5 +1,5 @@
 {
-    "name": "antd-color-picker",
+    "name": "@kwooshung/antd-color-picker",
     "version": "1.0.0",
     "description": "基于 Antd 的拾色器",
     "main": "index.js",
