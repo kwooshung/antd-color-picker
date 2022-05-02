@@ -1,3 +1,13 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight:100 !important;
+    font-family:var(--font-family-Bebas);
+}
+
 .header {
     position:relative;
     height:580px;
@@ -17,7 +27,7 @@
             position:relative;
             display:flex;
             justify-content:space-between;
-            max-width:780px;
+            max-width:1000px;
             padding:50px 20px;
             margin:0 auto;
             z-index:1;
@@ -29,7 +39,6 @@
                     > h1 {
                         color:var(--text-color);
                         font-weight:100;
-                        font-family:var(--font-family-Bebas);
                     }
 
                     > div,
@@ -40,6 +49,10 @@
 
                 &:last-child {
                     width:260px;
+
+                    [class*='ks-antd-color-picker-area'] {
+                        box-shadow:rgb(0 0 0 / 30%) 0 0 2px, rgb(0 0 0 / 30%) 0 4px 8px;
+                    }
 
                     .theme-segmented {
                         display:flex;
@@ -52,19 +65,32 @@
     }
 }
 
-.article {
+.article,
+.antd-components {
     width:100%;
     max-width:1000px;
     padding:40px;
     margin:0 auto;
 }
 
+.antd-components {
+    > div {
+        &:not(:last-child) {
+            margin-bottom:40px;
+        }
+
+        &.color-picker-types {
+            [class*='ks-antd-color-picker-area'] {
+                box-shadow:rgb(0 0 0 / 30%) 0 0 2px, rgb(0 0 0 / 30%) 0 4px 8px;
+            }
+        }
+    }
+}
+
 html {
     font-weight:100;
 
     [class*='ks-antd-color-picker-area'] {
-        box-shadow:rgb(0 0 0 / 30%) 0 0 2px, rgb(0 0 0 / 30%) 0 4px 8px;
-
         > div {
             &[class*='ks-antd-color-picker-body'] {
                 background:var(--panels-background);

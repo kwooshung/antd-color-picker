@@ -1,6 +1,6 @@
 import styles from './index.module.less';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { Segmented, Typography } from 'antd';
+import { Button, Modal, Popover, Segmented, Space, Typography } from 'antd';
 import MdEditor from "rich-markdown-editor";
 import KsColorPicker from '../../../src/components'
 import { Colors } from '../../../src/Interfaces/Colors';
@@ -42,6 +42,13 @@ const Example: FC<ExampleProps> = ({
     const [stateArticleGet, stateArticleSet] = useState<string>('');
 
     /**
+     * 状态：弹窗
+     */
+    const [stateModalVisibleGet, stateModalVisibleSet] = useState<boolean>(false);
+
+
+
+    /**
      * 函数
      */
     const methods = {
@@ -61,24 +68,45 @@ const Example: FC<ExampleProps> = ({
      */
     const events = {
         /**
+         * 事件：弹窗相关
+         */
+        onModal: {
+            /**
+             * 事件：显示
+             */
+            show() { stateModalVisibleSet(true); },
+            /**
+             * 事件：隐藏、关闭、取消
+             */
+            hide() { stateModalVisibleSet(false); }
+        },
+        /**
          * 事件：改变
          */
         onChange: {
             /**
-             * 事件：颜色
+             * 事件：背景颜色
              *
              * @param {Colors} color 颜色类型
              */
-            color(color: Colors) {
+            backgroundColor(color: Colors) {
                 stateBackgroundColorSet(color);
             },
             /**
-             * 事件：主题
-             * 
-             * @param {(string | number)} val 值
+             * 事件：主要颜色
+             *
+             * @param {string} color 颜色类型
              */
-            themes(val: string | number) {
-                stateThemeSet(val);
+            theme(color: string) {
+                stateThemeSet(color);
+            },
+            /**
+             * 事件：主要颜色
+             *
+             * @param {Colors} color 颜色类型
+             */
+            primamryColor(color: Colors) {
+                statePrimaryColorSet(color);
             }
         }
     };
@@ -113,6 +141,53 @@ const Example: FC<ExampleProps> = ({
      */
     const renders = {
         /**
+         * 更换主题色的拾色器
+         *
+         * @param {('hexa' | 'rgba' | 'hsla' | 'hsva')} [type='hexa'] 颜色显示模式
+         * @return {*} {ReactNode} ReactNode节点
+         */
+        primaryColorPicker(type: 'hexa' | 'rgba' | 'hsla' | 'hsva' = 'hexa'): ReactNode {
+            return <KsColorPicker.Chrome color={statePrimaryColorGet} colorType={type} colourless={true} onChange={events.onChange.primamryColor} />
+        },
+        /**
+         * Ant Design 组件
+         *
+         * @return {*} {ReactNode} ReactNode节点
+         */
+        antds(): ReactNode {
+            return <div className={styles['antd-components']}>
+                <Typography.Title level={2}>Ant Design: Color Pickers </Typography.Title>
+                <div className={styles['color-picker-types']}>
+                    <Space align="start">
+                        {this.primaryColorPicker('hexa')}
+                        {this.primaryColorPicker('rgba')}
+                        {this.primaryColorPicker('hsla')}
+                        {this.primaryColorPicker('hsva')}
+                    </Space>
+                </div>
+                <Typography.Title level={2}>Ant Design: Dynamic Theme</Typography.Title>
+                <div>
+                    <Space>
+                        <Popover title={"动态修改：Primary-Color"} content={this.primaryColorPicker()} trigger="click">
+                            <Button>气泡卡片/Popover</Button>
+                        </Popover>
+                        <Button type="primary" onClick={events.onModal.show}>打开弹窗</Button>
+                    </Space>
+                </div>
+                <Typography.Title level={2}>Ant Design: Components</Typography.Title>
+                <div>
+                    <Space>
+                        <Button type="primary">Primary Button</Button>
+                        <Button>Default Button</Button>
+                        <Button type="dashed">Dashed Button</Button>
+                        <Button type="text">Text Button</Button>
+                        <Button type="link">Link Button</Button>
+                    </Space>
+                </div>
+                <Modal title="动态修改：Primary-Color" width={275} visible={stateModalVisibleGet} footer={null} onCancel={events.onModal.hide}>{this.primaryColorPicker()}</Modal>
+            </div>;
+        },
+        /**
          * 编辑器
          *
          * @param {string} code MD代码
@@ -144,7 +219,7 @@ const Example: FC<ExampleProps> = ({
                     <div>
                         <KsColorPicker.Chrome color={stateBackgroundColorGet} colourless={true} onChange={events.onChange.color}>
                             <div className={styles['theme-segmented']}>
-                                <Segmented options={[{ value: 'light', label: '☀️ 浅色主题' }, { value: 'dark', label: '🌛 深色主题' }]} size="small" onChange={events.onChange.themes} />
+                                <Segmented options={[{ value: 'light', label: '☀️ 浅色主题' }, { value: 'dark', label: '🌛 深色主题' }]} size="small" onChange={events.onChange.theme} />
                             </div>
                         </KsColorPicker.Chrome>
                     </div>
@@ -159,6 +234,7 @@ const Example: FC<ExampleProps> = ({
         main(): JSX.Element {
             return <>
                 {this.header()}
+                {this.antds()}
                 {this.apiDoc(stateArticleGet)}
             </>;
         }
