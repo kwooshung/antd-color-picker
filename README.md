@@ -8,6 +8,38 @@
 - 世面上虽然已有很多类似的插件，但是质量参差不齐，虽然也有很成熟的组件，如：[casesandberg](https://github.com/casesandberg)/**[react-color](https://github.com/casesandberg/react-color)**，但是对 [ant-design](https://github.com/ant-design)/**[ant-design](https://github.com/ant-design/ant-design)** 的支持不是特别好，特别是输入框，视觉上与 [ant-design](https://github.com/ant-design)/**[ant-design](https://github.com/ant-design/ant-design)** 不统一！
 - 由于[官方暂时不打算开发：ColorPicker组件](https://github.com/ant-design/ant-design/issues/35315#issuecomment-1112807958)，所以只好自己动手弄一个简易版本（足以应付绝大多数场景了），后期再考虑更多功能。
 
+# 安装
+
+### yarn
+
+```cmd
+yarn add @kwooshung/antd-color-picker
+```
+
+### npm
+
+```cmd
+npm install @kwooshung/antd-color-picker
+```
+
+# 使用
+
+### 引入
+
+```typescript
+import KsColorPicker from '@kwooshung/antd-color-picker';
+```
+
+### 简单使用
+
+```typescript
+<KsColorPicker.Chrome color='#f00' onChange={events.onChange.color} />
+```
+
+### [详细演示代码](https://github.com/kwooshung/antd-color-picker/blob/master/docs/components/Example/index.tsx)
+
+
+
 # 演示
 
 在线演示：[DEMO](https://kwooshung.github.io/antd-color-picker/)
@@ -17,7 +49,7 @@
 | 属性          | 说明                                                     | 数据类型                             | 必须 | 默认值                         | 版本   |
 | ------------- | -------------------------------------------------------- | ------------------------------------ | ---- | ------------------------------ | ------ |
 | className     | 类样式名                                                 | string                               | 否   |                                | v1.0.0 |
-| colourless    | 无色模式，主要针对按钮，箭头图标，文字颜色均为浏览器默认 | boolean                              | 否   | false                          | v1.0.0 |
+| colourless    | 无色模式，主要针对按钮，箭头图标，文字颜色均为浏览器默认，这样可以使用 [Antd 动态主题](https://ant.design/docs/react/customize-theme-variable-cn)，[颜色案例代码](#颜色案例代码) | boolean                              | 否   | false                          | v1.0.0 |
 | width         | 宽度                                                     | number \| string（hexa色值，含`#`号）    | 否   | 225                            | v1.0.0 |
 | color         | 默认颜色                                                 | [Colors](#colors) \| string          | 否   | #194d33                        | v1.0.0 |
 | colorType     | 默认表达式                                               | `hexa` | `rgba` | `hsla` | `hsva`    |
@@ -31,6 +63,12 @@
 | onChange      | 颜色改变时的回调函数                                     | (*color*: [Colors](#colors)) => void | 否   | undefined                      | v1.0.0 |
 
 # Colors
+
+```typescript
+import { Colors } from '@kwooshung/antd-color-picker/Interfaces/Colors';
+```
+
+
 
 ```TypeScript
 interface Colors {
@@ -79,6 +117,64 @@ interface Colors {
     }
 }
 ```
+
+# 颜色案例代码
+
+```less
+[class*='ks-antd-color-picker-area'] {
+        box-shadow:rgb(0 0 0 / 30%) 0 0 2px, rgb(0 0 0 / 30%) 0 4px 8px;
+
+        > div {
+            &[class*='ks-antd-color-picker-body'] {
+                background:var(--panels-background);
+
+                > [class*='ks-antd-color-picker-bars'] {
+                    > [class*='ks-antd-color-picker-alpha'] {
+                        box-shadow:inset rgb(0 0 0 / 25%) 0 0 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    &[data-theme*='light'] {
+        [class*='ks-antd-color-picker-area'] {
+            > div {
+                &[class*='ks-antd-color-picker-body'] {
+                    > [class*='ks-antd-color-picker-controls'] {
+                        > ul {
+                            &[class*='ks-antd-color-picker-input-editable'] {
+                                > li {
+                                    > [class*='ks-antd-color-picker-input'] {
+                                        [class*='input-group-addon'],
+                                        [class*='input-number-group-addon'] {
+                                            color:#aaa;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &[class*='ks-antd-color-picker-buttons'] {
+                                background-color:#f0f0f0;
+
+                                > li {
+                                    color:#ccc;
+
+                                    &:hover {
+                                        color:#666;
+                                        background-color:#ddd;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+```
+
+
 
 # 感谢
 
