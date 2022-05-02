@@ -1,13 +1,14 @@
 .header {
     position:relative;
     height:580px;
+    background:#fff;
 
     > div {
         &:first-child {
             position:absolute;
             width:100%;
             height:100%;
-            opacity:0.5;
+            opacity:.65;
             transition:background-color 100ms linear;
             z-index:0;
         }
@@ -49,6 +50,12 @@
             }
         }
     }
+}
+
+.article {
+    width:100%;
+    max-width:1000px;
+    margin:0 auto;
 }
 
 html {

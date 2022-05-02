@@ -1,9 +1,10 @@
 import styles from './index.module.less';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import KsColorPicker from '../../../src/components'
-import { Colors } from '../../../src/components/Chrome';
-import Variables from '../../script/variables';
 import { Segmented, Typography } from 'antd';
+import MdEditor from "rich-markdown-editor";
+import KsColorPicker from '../../../src/components'
+import { Colors } from '../../../src/Interfaces/Colors';
+import Variables from '../../script/variables';
 
 /**
  * 接口定义：Props属性
@@ -39,7 +40,15 @@ const Example: FC<ExampleProps> = ({
      * 函数
      */
     const methods = {
-
+        /**
+         * 请求 Markdown
+         *
+         * @param {string} url 地址
+         * @return {*} 结果
+         */
+        async requestMD(url: string) {
+            return await fetch(url);
+        }
     };
 
     /**
@@ -93,6 +102,15 @@ const Example: FC<ExampleProps> = ({
      */
     const renders = {
         /**
+         * 编辑器
+         *
+         * @param {string} code MD代码
+         * @return {*} {ReactNode} ReactNode节点
+         */
+        editor(code: string): ReactNode {
+            return <MdEditor className={styles.article} dark={stateThemeGet === 'dark'} value={code} readOnly={true} />;
+        },
+        /**
          * 头部
          *
          * @return {*} {ReactNode} ReactNode节点
@@ -130,6 +148,9 @@ const Example: FC<ExampleProps> = ({
         main(): JSX.Element {
             return <>
                 {this.header()}
+                {this.editor(`# 为什么存在这个组件？
+                世面上虽然已有很多类似的插件，但是质量参差不齐，虽然也有很成熟的组件，如：React Color
+                `)}
                 <KsColorPicker.Chrome color={stateBackgroundColorGet} colourless={true} onChange={events.onChange.color} />
             </>;
         }

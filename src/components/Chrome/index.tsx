@@ -6,50 +6,7 @@ import Alpha from '@uiw/react-color-alpha';
 import { HsvaColor, hsvaToRgbaString, color as ConvertColor, validHex, hexToHsva, rgbaToHsva, hslaToHsva } from '@uiw/color-convert';
 import { Input, InputNumber, Typography } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
-
-export interface Colors {
-    hex: {
-        short: string,
-        full: string
-    },
-    hexa: {
-        short: string,
-        full: string
-    },
-    rgb: {
-        r: number,
-        g: number,
-        b: number
-    },
-    rgba: {
-        r: number,
-        g: number,
-        b: number,
-        a: number
-    },
-    hsl: {
-        h: number,
-        l: number,
-        s: number
-    },
-    hsla: {
-        h: number,
-        l: number,
-        s: number,
-        a: number
-    },
-    hsv: {
-        h: number,
-        s: number,
-        v: number
-    },
-    hsva: {
-        h: number,
-        s: number,
-        v: number,
-        a: number
-    }
-};
+import { Colors } from 'src/Interfaces/Colors';
 
 /**
  * 接口定义：Props属性
@@ -88,17 +45,17 @@ export interface ChromeProps {
      */
     hexAlphaForce?: boolean,
     /**
-     * 复制功能：是否启动
+     * HUE 和 Alpha 滑条指针元素
+     */
+    pointer?: ReactNode | JSX.Element,
+    /**
+     * 复制功能：是否启用
      */
     copy?: boolean,
     /**
      * 复制功能：颜色复制成功的提示 [复制前，复制后]
      */
     copytip?: [string, string],
-    /**
-     * HUE 和 Alpha 滑条指针元素
-     */
-    pointer?: ReactNode | JSX.Element,
     /**
      * 事件：复制后
      */
@@ -124,7 +81,8 @@ const defaultProps: ChromeProps = {
     hexType: 'short',
     hexUppercase: false,
     hexAlphaForce: false,
-    copytip: ['复制当前色值', '已成功复制']
+    copytip: ['复制当前色值', '已成功复制'],
+    copy: true
 };
 
 const Chrome: FC<ChromeProps> = ({
@@ -520,12 +478,15 @@ const Chrome: FC<ChromeProps> = ({
                      * @return {*} {ReactNode} ReactNode节点
                      */
                     name(copytext: string, name: string): ReactNode {
-                        const copyable = {
-                            text: copytext,
-                            tooltips: props.copytip,
-                            onCopy: events.onCopy
-                        };
-                        return <Typography.Paragraph copyable={copyable}>{name}</Typography.Paragraph>;
+                        if (props.copy) {
+                            const copyable = {
+                                text: copytext,
+                                tooltips: props.copytip,
+                                onCopy: events.onCopy
+                            };
+                            return <Typography.Paragraph copyable={copyable}>{name}</Typography.Paragraph>;
+                        }
+                        return <Typography.Paragraph >{name}</Typography.Paragraph>;
                     }
                 },
                 /**

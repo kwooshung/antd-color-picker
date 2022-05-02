@@ -51,7 +51,8 @@
         "@uiw/react-color-alpha": "^1.0.10",
         "@uiw/react-color-hue": "^1.0.10",
         "@uiw/react-color-saturation": "^1.0.10",
-        "rich-markdown-editor": "^11.21.3"
+        "rich-markdown-editor": "^11.21.3",
+        "styled-components": "^5.3.5"
     },
     "peerDependencies": {
         "@uiw/color-convert": "^1.0.10",
