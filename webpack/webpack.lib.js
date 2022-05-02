@@ -5,6 +5,13 @@ const { absPath, common } = require('./webpack.common');
 
 module.exports = merge(common, {
     mode: 'production',
+    entry: absPath('../src/index.ts'),
+    output: {
+        path: absPath('../lib'),
+        filename: 'index.js',
+        // publicPath: absPath('../demo'),
+        clean: true
+    },
     optimization: {
         minimizer: [
             new WebpackTerserPlugin({

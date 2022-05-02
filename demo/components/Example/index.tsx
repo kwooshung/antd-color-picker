@@ -2,7 +2,7 @@ import styles from './index.module.less';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { Button, Modal, Popover, Segmented, Space, Typography } from 'antd';
 import MdEditor from "rich-markdown-editor";
-import KsColorPicker from '../../../src/components'
+import KsColorPicker from '../../../src';
 import { Colors } from '../../../src/Interfaces/Colors';
 import Variables from '../../script/variables';
 

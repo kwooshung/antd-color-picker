@@ -6,7 +6,7 @@ module.exports = merge(common, {
     target: 'web',
     devtool: 'inline-source-map',
     devServer: {
-        //contentBase: absPath('../docs'),
+        // contentBase: absPath('../docs'),
         host: '127.0.0.1',
         port: 8000,
         hot: true,
