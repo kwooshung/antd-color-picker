@@ -112,7 +112,7 @@ const Example: FC<ExampleProps> = ({
     };
 
     useEffect(() => {
-        fetch('https://raw.githubusercontent.com/kwooshung/antd-color-picker/develop/README.md').then(async (data) => {
+        fetch('https://raw.githubusercontent.com/kwooshung/antd-color-picker/master/README.md').then(async (data) => {
             stateArticleSet(await data.text());
         });
     }, []);
