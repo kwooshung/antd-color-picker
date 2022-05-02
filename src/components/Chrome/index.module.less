@@ -1,6 +1,6 @@
 .chrome-picker {
     border-radius:2px;
-    box-shadow:0 0 3px rgb(0 0 0 / 50%);
+    overflow:hidden;
 
     > .saturation {
         position:relative;
@@ -76,6 +76,22 @@
             &.hsla { ul { &.input-editable { transform:translateY(-188px); } } }
             &.hsva { ul { &.input-editable { transform:translateY(-330px); } } }
 
+            &.upper-case {
+                > ul {
+                    &.input-editable {
+                        > li {
+                            > div {
+                                &.inputs {
+                                    input {
+                                        text-transform:uppercase;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             > ul {
                 list-style:none;
                 padding:0;
@@ -124,12 +140,13 @@
 
                 &.buttons {
                     position:absolute;
-                    top:0;
+                    top:42%;
                     right:0;
                     width:20px;
                     height:24px;
                     border-radius:3px;
                     overflow:hidden;
+                    transform:translate(0, -50%);
 
                     > li {
                         display:flex;
@@ -163,20 +180,6 @@
                                 [class*='input-group-addon'],
                                 [class*='input-number-group-addon'] {
                                     color:#969696;
-                                }
-                            }
-
-                            > div {
-                                &:last-child {
-                                    .btn-copy {
-                                        color:#aaa;
-                                        background-color:#f0f0f0;
-
-                                        &:hover {
-                                            color:#666;
-                                            background-color:#ddd;
-                                        }
-                                    }
                                 }
                             }
                         }

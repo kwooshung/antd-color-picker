@@ -56,6 +56,10 @@ export interface Colors {
  */
 export interface ChromeProps {
     /**
+     * className
+     */
+    className?: string,
+    /**
      * 无色
      */
     colourless?: boolean,
@@ -66,7 +70,7 @@ export interface ChromeProps {
     /**
      * 颜色：HEXA
      */
-    color?: string,
+    color?: Colors | string,
     /**
      * 颜色默认展现类型
      */
@@ -74,11 +78,15 @@ export interface ChromeProps {
     /**
      * 是否简化十六进制颜色
      */
-    hexType: 'short' | 'full',
+    hexType?: 'short' | 'full',
+    /**
+     * Hex是否大写
+     */
+    hexUppercase?: boolean,
     /**
      * 是否强制显示hex的通明度值
      */
-    hexAlphaForce: boolean,
+    hexAlphaForce?: boolean,
     /**
      * 复制功能：是否启动
      */
@@ -94,11 +102,15 @@ export interface ChromeProps {
     /**
      * 事件：复制后
      */
-    onCopy: (color: Colors) => void,
+    onCopy?: (color: Colors) => void,
     /**
      * 事件：颜色改变
      */
-    onChange: (color: Colors) => void
+    onChange?: (color: Colors) => void,
+    /**
+     * 子元素
+     */
+    children?: ReactNode;
 };
 
 /**
@@ -110,6 +122,7 @@ const defaultProps: ChromeProps = {
     color: '#194d33',
     colorType: 'hexa',
     hexType: 'short',
+    hexUppercase: false,
     hexAlphaForce: false,
     copytip: ['复制当前色值', '已成功复制']
 };
@@ -119,7 +132,7 @@ const Chrome: FC<ChromeProps> = ({
     ...props
 }) => {
     /**
-     * 
+     * Refs
      */
     const refs = {
         styles: useRef<Array<string>>([styles.hexa, styles.rgba, styles.hsla, styles.hsva])
@@ -256,9 +269,18 @@ const Chrome: FC<ChromeProps> = ({
         }
     };
 
-    const [stateColorGet, stateColorSet] = useState<Colors>(() => methods.hsva2Color(methods.hexa2Hsva(props.color)));
+    /**
+     * 状态：色板颜色
+     */
+    const [stateColorGet, stateColorSet] = useState<Colors>(typeof props.color === 'string' ? methods.hsva2Color(methods.hexa2Hsva(props.color)) : props.color);
+    /**
+     * 状态：颜色类型索引
+     */
     const [stateControlsIndexGet, stateControlsIndexSet] = useState<number>(methods.colorType());
-    const [stateControlsHexGet, stateControlsHexSet] = useState<string>('');
+    /**
+     * 状态：临时的十六进制颜色，避免出错无法输入
+     */
+    const [stateControlsHexTempGet, stateControlsHexTempSet] = useState<string>('');
 
     /**
      * 事件
@@ -315,15 +337,15 @@ const Chrome: FC<ChromeProps> = ({
                 if (e) {
                     try {
                         if (e.target.value.length === 5 || e.target.value.length === 7) {
-                            stateControlsHexSet(e.target.value);
+                            stateControlsHexTempSet(e.target.value);
                         }
                         else {
-                            stateControlsHexSet('');
+                            stateControlsHexTempSet('');
                             stateColorSet(methods.hsva2Color(methods.hexa2Hsva(`#${e.target.value}`)));
                         }
                     }
                     catch {
-                        stateControlsHexSet(e.target.value);
+                        stateControlsHexTempSet(e.target.value);
                     }
                 }
             },
@@ -344,7 +366,7 @@ const Chrome: FC<ChromeProps> = ({
      * 更新副作用：颜色更新
      */
     useEffect(() => {
-        stateColorSet(methods.hsva2Color(methods.hexa2Hsva(props.color)));
+        props.color && stateColorSet(typeof props.color === 'string' ? methods.hsva2Color(methods.hexa2Hsva(props.color)) : props.color);
     }, [props.color]);
 
     /**
@@ -449,7 +471,7 @@ const Chrome: FC<ChromeProps> = ({
                  * @return {*} {ReactNode} ReactNode节点
                  */
                 main(): ReactNode {
-                    return <div className={`ks-antd-color-picker-bars-area ${styles['bar-area']}`}>
+                    return <div className={`ks-antd-color-picker-bars ${styles['bar-area']}`}>
                         {this.preview()}
                         {this.slider.main()}
                     </div>;
@@ -474,7 +496,7 @@ const Chrome: FC<ChromeProps> = ({
                          * @return {*} {ReactNode} ReactNode节点
                          */
                         hex(value: Colors['hex'] | Colors['hexa']): ReactNode {
-                            return <Input addonBefore="#" size='small' value={stateControlsHexGet ? stateControlsHexGet : value[props.hexType].replace('#', '')} maxLength={8} onChange={events.inputs.onHexChange} />;
+                            return <Input addonBefore="#" size='small' value={stateControlsHexTempGet ? stateControlsHexTempGet : value[props.hexType].replace('#', '')} maxLength={8} onChange={events.inputs.onHexChange} />;
                         },
                         /**
                          * 数值
@@ -584,8 +606,8 @@ const Chrome: FC<ChromeProps> = ({
                  * @return {*} {ReactNode} ReactNode节点
                  */
                 main(): ReactNode {
-                    return <div className={`${styles['controls']} ${refs.styles.current[stateControlsIndexGet]}`}>
-                        <ul className={`input-editable ${styles['input-editable']}`}>
+                    return <div className={`ks-antd-color-picker-controls ${styles['controls']} ${refs.styles.current[stateControlsIndexGet]}${props.hexUppercase ? ` ${styles['upper-case']}` : ''}`}>
+                        <ul className={`ks-antd-color-picker-input-editable ${styles['input-editable']}`}>
                             {this.hexa()}
                             {this.rgba()}
                             {this.hsla()}
@@ -601,7 +623,7 @@ const Chrome: FC<ChromeProps> = ({
              * @return {*} {ReactNode} ReactNode节点
              */
             main(): ReactNode {
-                return <div className={`${styles.body}${props.colourless ? ` ${styles.colourless}` : ''}`}>
+                return <div className={`ks-antd-color-picker-body ${styles.body}${props.colourless ? ` ${styles.colourless}` : ''}`}>
                     {this.bars.main()}
                     {this.controls.main()}
                     {children}
@@ -614,7 +636,7 @@ const Chrome: FC<ChromeProps> = ({
          * @return {*} {JSX.Element} JSX元素
          */
         main(): JSX.Element {
-            return <div className={`ks-antd-color-picker ${styles['chrome-picker']}`} style={{ width: typeof props.width === 'number' ? `${props.width}px` : props.width }}>
+            return <div className={`ks-antd-color-picker-area ${styles['chrome-picker']}${(props.className ? ` ${props.className}` : '')}`} style={{ width: typeof props.width === 'number' ? `${props.width}px` : props.width }}>
                 {this.saturation()}
                 {this.body.main()}
             </div>;

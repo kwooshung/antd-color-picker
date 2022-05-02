@@ -1,0 +1,144 @@
+.header {
+    position:relative;
+    height:580px;
+
+    > div {
+        &:first-child {
+            position:absolute;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            transition:background-color 100ms linear;
+            z-index:0;
+        }
+
+        &:last-child {
+            position:relative;
+            display:flex;
+            justify-content:space-between;
+            max-width:780px;
+            padding:50px 20px;
+            margin:0 auto;
+            z-index:1;
+
+            > div {
+                &:first-child {
+                    margin-right:100px;
+
+                    > h1 {
+                        color:var(--text-color);
+                        font-weight:100;
+                        font-family:var(--font-family-Bebas);
+                    }
+
+                    > div,
+                    > ul {
+                        color:var(--text-color);
+                    }
+                }
+
+                &:last-child {
+                    width:260px;
+
+                    .theme-segmented {
+                        display:flex;
+                        justify-content:center;
+                        margin-top:20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+html {
+    font-weight:100;
+
+    [class*='ks-antd-color-picker-area'] {
+        box-shadow:rgb(0 0 0 / 30%) 0 0 2px, rgb(0 0 0 / 30%) 0 4px 8px;
+
+        > div {
+            &[class*='ks-antd-color-picker-body'] {
+                background:var(--panels-background);
+
+                > [class*='ks-antd-color-picker-bars'] {
+                    > [class*='ks-antd-color-picker-alpha'] {
+                        box-shadow:inset rgb(0 0 0 / 25%) 0 0 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    &[data-theme*='light'] {
+        [class*='ks-antd-color-picker-area'] {
+            > div {
+                &[class*='ks-antd-color-picker-body'] {
+                    > [class*='ks-antd-color-picker-controls'] {
+                        > ul {
+                            &[class*='ks-antd-color-picker-input-editable'] {
+                                > li {
+                                    > [class*='ks-antd-color-picker-input'] {
+                                        [class*='input-group-addon'],
+                                        [class*='input-number-group-addon'] {
+                                            color:#aaa;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &[class*='ks-antd-color-picker-buttons'] {
+                                background-color:#f0f0f0;
+
+                                > li {
+                                    color:#ccc;
+
+                                    &:hover {
+                                        color:#666;
+                                        background-color:#ddd;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &[data-theme*='dark'] {
+        [class*='ks-antd-color-picker-area'] {
+            > div {
+                &[class*='ks-antd-color-picker-body'] {
+                    > [class*='ks-antd-color-picker-controls'] {
+                        > ul {
+                            &[class*='ks-antd-color-picker-input-editable'] {
+                                > li {
+                                    > [class*='ks-antd-color-picker-input'] {
+                                        [class*='input-group-addon'],
+                                        [class*='input-number-group-addon'] {
+                                            color:var(--text-color);
+                                        }
+                                    }
+                                }
+                            }
+
+                            &[class*='ks-antd-color-picker-buttons'] {
+                                background-color:#333;
+
+                                > li {
+                                    color:#ccc;
+
+                                    &:hover {
+                                        color:#aaa;
+                                        background-color:#666;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

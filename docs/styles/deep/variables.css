@@ -1,0 +1,12 @@
+html[data-theme*='deep'] {
+    --primary-background:#16202f;
+    --secondary-background:#1c283b;
+    --border-primary-base:rgb(160 180 200 / 9%);
+    --border-secondary-base:rgb(120 130 140 / 9%);
+    --panels-background:var(--primary-background);
+    --panels-border-shadow-background:var(--panels-background);
+    --table-row-hover-td-border:var(--border-primary-base);
+    --table-row-hover-td-border-hover:#303030;
+    --table-expanded-row-background:#182538;
+    --table-filter-trigger-container-open-background:#525252;
+}

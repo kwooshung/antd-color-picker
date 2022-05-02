@@ -1,5 +1,6 @@
-import React, { FC, createRef, useEffect } from 'react';
+import React, { FC } from 'react';
 import Example from './components/Example';
+import { ConfigProvider } from 'antd';
 
 /**
  * 接口定义：Props属性
@@ -26,9 +27,9 @@ const App: FC<AppProps> = ({
          * @return {*}  {JSX.Element}
          */
         main(): JSX.Element {
-            return <>
+            return <ConfigProvider>
                 <Example />
-            </>;
+            </ConfigProvider>;
         }
     };
 

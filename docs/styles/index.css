@@ -1,0 +1,6 @@
+@import 'variables.css'; /* 公共变量 */
+@import 'light/variables.css'; /* 浅色独有变量 */
+@import 'dark/variables.css'; /* 深色独有变量 */
+@import 'deep/variables.css'; /* 深蓝独有变量 */
+@import 'components.css'; /* 所有的Antd组件样式，以及浅色和深色都用的变量 */
+@import 'dark/index.css'; /* 深色组件，仅将颜色抽离 */
