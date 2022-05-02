@@ -1,5 +1,11 @@
-[![License MIT](https://img.shields.io/badge/license-MIT-ff4d4f?label=License)](https://github.com/kwooshung/antd-color-picker/blob/master/LICENSE) ![Npm Version](https://img.shields.io/static/v1?label=Npm&message=4.20.0&color=ea2039) [![Issues](https://img.shields.io/static/v1?label=Issues&message=on github&color=24292f)](https://github.com/kwooshung/antd-color-picker/issues) ![Ant Design 最低版本](https://img.shields.io/static/v1?label=Ant%20Design&message=v4.20.0%2B&color=1890ff)
-![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=v1.0.0&color=52c41a) [![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on github&color=1890ff)](https://github.com/kwooshung/antd-color-picker) [![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on gitee&color=f38d30)](https://gitee.com/kwooshung/antd-color-picker) [![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on npm&color=ea2039)](https://www.npmjs.com/package/kwooshung/antd-color-picker)
+[![License MIT](https://img.shields.io/badge/license-MIT-ff4d4f?label=License)](https://github.com/kwooshung/antd-color-picker/blob/master/LICENSE)
+[![Npm Version](https://img.shields.io/static/v1?label=Npm&message=4.20.0&color=ea2039)
+[![Issues](https://img.shields.io/static/v1?label=Issues&message=on github&color=24292f)](https://github.com/kwooshung/antd-color-picker/issues)
+[![Ant Design 最低版本](https://img.shields.io/static/v1?label=Ant%20Design&message=v4.20.0%2B&color=1890ff)
+[![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=v1.0.0&color=52c41a)
+[![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on github&color=1890ff)](https://github.com/kwooshung/antd-color-picker)
+[![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on gitee&color=f38d30)](https://gitee.com/kwooshung/antd-color-picker)
+[![kwooshung/antd-color-picker](https://img.shields.io/static/v1?label=kwooshung%2Fantd-color-picker&message=on npm&color=ea2039)](https://www.npmjs.com/package/kwooshung/antd-color-picker)
 
 ---
 
