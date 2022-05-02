@@ -7,11 +7,11 @@ const WebpackMiniCssExtractPlugin = require('mini-css-extract-plugin');
 const absPath = _path => path.resolve(__dirname, _path);
 
 const common = {
-    entry: absPath('../docs/index.tsx'),
+    entry: absPath('../demo/index.tsx'),
     output: {
-        path: absPath('../docs/build'),
+        path: absPath('../docs'),
         filename: '[name].bundle.js',
-        // publicPath: absPath('../docs'),
+        // publicPath: absPath('../demo'),
         clean: true
     },
     module: {
@@ -51,7 +51,7 @@ const common = {
             filename: '[name].[hash:8].css'
         }),
         new WebpackHtmlWebpackPlugin({
-            template: absPath('../docs/index.html'),
+            template: absPath('../demo/index.html'),
             filename: 'index.html',
             title: '@KwooShung/Antd Color Picker',
             version: ['1.0.0']
@@ -61,7 +61,7 @@ const common = {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
         alias: {
             '@': absPath('../src'),
-            '@docs': absPath('../docs'),
+            '@demo': absPath('../demo'),
             '@com': absPath('../src/components'),
             '@scripts': absPath('../src/assets/scripts/'),
             '@utils': absPath('../src/assets/scripts/utils/')
