@@ -29,7 +29,7 @@ const Example: FC<ExampleProps> = ({
     /**
      * 状态：Antd 主题色
      */
-    const [statePrimaryColorGet, statePrimaryColorSet] = useState<Colors>();
+    const [statePrimaryColorGet, statePrimaryColorSet] = useState<Colors | string>('#1890ff');
 
     /**
      * 状态：主题
@@ -132,7 +132,7 @@ const Example: FC<ExampleProps> = ({
      */
     useEffect(() => {
         if (statePrimaryColorGet) {
-            Variables({ primaryColor: statePrimaryColorGet.hexa.short });
+            typeof statePrimaryColorGet === 'string' || Variables({ primaryColor: statePrimaryColorGet.hexa.short });
         }
     }, [statePrimaryColorGet]);
 
